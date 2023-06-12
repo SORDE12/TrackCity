@@ -10,15 +10,24 @@ import {
   Stack,
   Image,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import env from "../Images/env.jpg";
 import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import Login from "../Pages/Login";
 
 const Links = [
   { link: "Home", path: "/" },
   { link: "Add City Details", path: "/addcity" },
   { link: "Dashboard", path: "/dashboard" },
+];
+
+const Links1 = [
+  { link: "Home", path: "/" },
+  { link: "Add City Details", path: "/" },
+  { link: "Dashboard", path: "/" },
 ];
 
 const NavLink = ({ link, path }) => (
@@ -40,8 +49,14 @@ const NavLink = ({ link, path }) => (
 );
 
 export default function Navbar() {
+  const { isAuthenticated } = useAuth0();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [login, setLogin] = useState(false);
+  const toast = useToast();
+
+  let handleClick = () => {
+    console.log("Ok");
+  };
 
   return (
     <>
@@ -65,32 +80,30 @@ export default function Navbar() {
               spacing={4}
               display={{ base: "none", md: "flex" }}
             >
-              {Links.map((e) => (
-                <NavLink link={e.link} path={e.path} key={e.link} />
-              ))}
+              {isAuthenticated
+                ? Links.map((e) => (
+                    <NavLink link={e.link} path={e.path} key={e.link} />
+                  ))
+                : Links1.map((e) => (
+                    <NavLink link={e.link} path={e.path} key={e.link} />
+                  ))}
             </HStack>
           </HStack>
           <Flex alignItems={"center"}>
-            <Link to="/login">
-              <Button
-                borderRadius="15px"
-                border="1px solid #008000 "
-                fontSize="18px"
-              >
-                {login ? "Logout" : "Login"}
-              </Button>
-            </Link>
+            <Login />
           </Flex>
         </Flex>
 
         {isOpen ? (
           <Box pb={4} display={{ md: "none" }}>
             <Stack as={"nav"} spacing={4}>
-              {Links.map((e) => (
-                <Link to={e.path}>
-                  <NavLink link={e.link} path={e.path} key={e.link} />
-                </Link>
-              ))}
+              {isAuthenticated
+                ? Links.map((e) => (
+                    <NavLink link={e.link} path={e.path} key={e.link} />
+                  ))
+                : Links1.map((e) => (
+                    <NavLink link={e.link} path={e.path} key={e.link} />
+                  ))}
             </Stack>
           </Box>
         ) : null}
