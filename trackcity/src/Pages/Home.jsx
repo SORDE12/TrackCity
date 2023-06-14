@@ -1,4 +1,4 @@
-import { Box, Heading, Image, SimpleGrid } from "@chakra-ui/react";
+import { Box, Heading, Image, SimpleGrid, Text } from "@chakra-ui/react";
 import React from "react";
 
 const Home = () => {
@@ -7,6 +7,7 @@ const Home = () => {
       <br />
       <br />
       <Heading>Welcome to Track City Project</Heading>
+      <Text>(Please login first to start this application)</Text>
       <br />
 
       <SimpleGrid width="100%" m="auto" columns={{ base: 1, sm: 1, md: 2, lg: 2 }} gap="20px">
