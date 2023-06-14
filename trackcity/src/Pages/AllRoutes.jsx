@@ -6,6 +6,7 @@ import AddCity from "./AddCity";
 import DashBoard from "./DashBoard";
 import Login from "./Login";
 import SignUp from "./SignUp";
+import List from "./List";
 
 const AllRoutes = () => {
   return (
@@ -15,6 +16,7 @@ const AllRoutes = () => {
       <Route path="/dashboard" element={<DashBoard />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
+      <Route path="/list" element={<List/>} />
     </Routes>
   );
 };

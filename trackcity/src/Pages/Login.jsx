@@ -18,13 +18,13 @@ import {
 } from "@chakra-ui/react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { AiOutlineUser } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
+
 
 function LoginAuth() {
   const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
   const size = "45px";
   const color = "teal";
-  const navigate = useNavigate();
+
 
   const pulseRing = keyframes`
     0% {
